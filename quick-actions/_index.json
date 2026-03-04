@@ -1,0 +1,152 @@
+[
+  {
+    "id": "plan-day",
+    "label": "Plan my day",
+    "icon": "☀️",
+    "description": "Daily planning — deadlines, focus time, meeting prep",
+    "author": { "name": "Drift Team" },
+    "tags": ["productivity", "planning"],
+    "options": [
+      {
+        "id": "plan-deadlines",
+        "label": "Prioritize my tasks by upcoming deadlines",
+        "prompt": "Help me plan my day by prioritizing tasks with the closest deadlines. Pull my calendar events and open tickets, then build a time-blocked schedule."
+      },
+      {
+        "id": "plan-deep-work",
+        "label": "Block out time for deep focus work",
+        "prompt": "Help me plan a deep-work day. Block out focus time, minimize context switches, and batch meetings together. Show me my calendar and suggest what to move."
+      },
+      {
+        "id": "plan-meetings",
+        "label": "Prep me for today's meetings",
+        "prompt": "Help me plan my day with meeting prep included. For each meeting on my calendar, suggest 2-3 prep items and allocate time before each one."
+      },
+      {
+        "id": "plan-quick",
+        "label": "Just give me the top 3 things to do",
+        "prompt": "Give me a quick 15-minute daily plan. Top 3 priorities, one thing to delegate, one thing to skip. Keep it concise."
+      }
+    ]
+  },
+  {
+    "id": "standup",
+    "label": "Draft a standup",
+    "icon": "📋",
+    "description": "Generate standup updates from your recent activity",
+    "author": { "name": "Drift Team" },
+    "tags": ["productivity", "communication"],
+    "options": [
+      {
+        "id": "standup-classic",
+        "label": "Classic format: yesterday, today, blockers",
+        "prompt": "Draft a standup update in the classic format: what I did yesterday, what I'm doing today, and any blockers. Pull from my recent activity and tickets."
+      },
+      {
+        "id": "standup-wins",
+        "label": "Lead with what I shipped this week",
+        "prompt": "Draft a standup update that highlights accomplishments. Lead with what I shipped or unblocked recently, then briefly mention today's plan."
+      },
+      {
+        "id": "standup-team",
+        "label": "Detailed update with links and ticket numbers",
+        "prompt": "Draft a detailed standup update meant for the whole team. Include links to PRs, ticket numbers, and specific progress percentages where possible."
+      },
+      {
+        "id": "standup-async",
+        "label": "Keep it to 2-3 sentences",
+        "prompt": "Draft a brief async standup update (2-3 sentences max). Just the essentials — what's done, what's next."
+      }
+    ]
+  },
+  {
+    "id": "review-code",
+    "label": "Review code changes",
+    "icon": "🔍",
+    "description": "Code review with focus on correctness, security, or architecture",
+    "author": { "name": "Drift Team" },
+    "tags": ["engineering", "code-review"],
+    "options": [
+      {
+        "id": "review-full",
+        "label": "Thorough review with improvement suggestions",
+        "prompt": "Do a thorough code review of the recent changes in this project. Check for correctness, readability, edge cases, and suggest concrete improvements."
+      },
+      {
+        "id": "review-security",
+        "label": "Check for security vulnerabilities",
+        "prompt": "Review the recent code changes with a security lens. Look for injection vulnerabilities, auth issues, data exposure, and OWASP top 10 concerns."
+      },
+      {
+        "id": "review-quick",
+        "label": "Quick scan — just flag obvious issues",
+        "prompt": "Do a quick scan of recent code changes. Flag anything that looks like a bug, a missing edge case, or a potential regression. Keep it brief."
+      },
+      {
+        "id": "review-architecture",
+        "label": "Are the patterns and abstractions right?",
+        "prompt": "Review the recent changes from an architecture perspective. Are the abstractions right? Any coupling concerns? Does it follow the existing patterns?"
+      }
+    ]
+  },
+  {
+    "id": "open-tickets",
+    "label": "Summarize my tickets",
+    "icon": "🎫",
+    "description": "Ticket summaries grouped by priority, due date, or sprint",
+    "author": { "name": "Drift Team" },
+    "tags": ["productivity", "project-management"],
+    "options": [
+      {
+        "id": "tickets-priority",
+        "label": "Group by priority, highlight urgent ones",
+        "prompt": "Summarize my open tickets grouped by priority. Highlight the most urgent ones and suggest which I should tackle first today."
+      },
+      {
+        "id": "tickets-due",
+        "label": "Sort by due date, flag overdue items",
+        "prompt": "Summarize my open tickets sorted by due date. Flag anything overdue or due this week. Suggest a realistic order to work through them."
+      },
+      {
+        "id": "tickets-sprint",
+        "label": "How is the sprint looking overall?",
+        "prompt": "Give me a sprint progress summary. How many tickets are done vs in-progress vs not started? What's at risk of not making it?"
+      },
+      {
+        "id": "tickets-stale",
+        "label": "Find stale tickets I should close",
+        "prompt": "Find tickets that look stale — no updates in over a week, vague descriptions, or already resolved. Suggest which ones I can close or reassign."
+      }
+    ]
+  },
+  {
+    "id": "brainstorm",
+    "label": "Brainstorm",
+    "icon": "💡",
+    "description": "Creative exploration — features, architecture, problem-solving",
+    "author": { "name": "Drift Team" },
+    "tags": ["creativity", "planning"],
+    "options": [
+      {
+        "id": "brainstorm-feature",
+        "label": "Explore what we could build next",
+        "prompt": "Help me brainstorm feature ideas. I want to explore what we could build next — ask me questions about our users and goals, then suggest creative directions."
+      },
+      {
+        "id": "brainstorm-architecture",
+        "label": "Think through an architecture decision",
+        "prompt": "Help me think through an architecture decision. I'll describe the problem and constraints, then let's map out options with trade-offs for each."
+      },
+      {
+        "id": "brainstorm-problem",
+        "label": "Help me get unstuck on a problem",
+        "prompt": "Help me solve a problem I'm stuck on. I'll describe what's going wrong and what I've tried, then help me find new angles to approach it."
+      },
+      {
+        "id": "brainstorm-process",
+        "label": "How can I ship faster?",
+        "prompt": "Help me brainstorm process improvements for my workflow. Ask me about my current dev process, then suggest concrete changes to ship faster."
+      }
+    ]
+  }
+]
