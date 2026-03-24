@@ -1,0 +1,28 @@
+{
+  "name": "plugin-quick-actions",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Run pnpm scripts from the menu bar with one click",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@vienna/sdk": "file:../../vienna/.worktrees/integrations-v2/packages/sdk"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "@types/react": "^19.0.0",
+    "@vienna/graphql": "file:../../vienna/.worktrees/integrations-v2/packages/graphql",
+    "@vienna/ui": "file:../../vienna/.worktrees/integrations-v2/packages/ui",
+    "typescript": "^5.9.3"
+  }
+}

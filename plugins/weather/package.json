@@ -1,0 +1,34 @@
+{
+  "name": "plugin-weather",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Weather forecast menu bar plugin",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@vienna/sdk": "file:../../vienna/.worktrees/integrations-v2/packages/sdk",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^6.1.2",
+    "@graphql-codegen/client-preset": "^5.2.3",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@types/node": "^25.3.2",
+    "@types/react": "^19.0.0",
+    "@vienna/graphql": "file:../../vienna/.worktrees/integrations-v2/packages/graphql",
+    "@vienna/ui": "file:../../vienna/.worktrees/integrations-v2/packages/ui",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.3"
+  }
+}

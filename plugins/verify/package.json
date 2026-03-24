@@ -1,0 +1,27 @@
+{
+  "name": "plugin-verify",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Verify Work — read testing instructions and launch apps from the menu bar",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts",
+    "./ui": "./src/ui/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vienna/sdk": "file:../../vienna/.worktrees/integrations-v2/packages/sdk"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "@types/react": "^19.0.0",
+    "@vienna/graphql": "file:../../vienna/.worktrees/integrations-v2/packages/graphql",
+    "@vienna/ui": "file:../../vienna/.worktrees/integrations-v2/packages/ui",
+    "graphql-tag": "^2.12.6",
+    "lucide-react": "^0.500.0",
+    "typescript": "^5.9.3"
+  }
+}

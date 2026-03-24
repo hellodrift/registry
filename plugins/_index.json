@@ -1,0 +1,57 @@
+[
+  {
+    "id": "weather",
+    "name": "Weather",
+    "description": "Weather forecast in the menu bar",
+    "version": "1.0.0",
+    "source": "inline",
+    "icon": "🌤️",
+    "category": "Utilities",
+    "tags": ["weather", "menu-bar"],
+    "author": { "name": "Drift Team" }
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "description": "GitHub integration — PRs, issues, workflows, and repositories",
+    "version": "1.0.0",
+    "source": "inline",
+    "icon": "🐙",
+    "category": "Integrations",
+    "tags": ["github", "git", "integration"],
+    "author": { "name": "Drift Team" }
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "description": "Linear project management — issues, projects, and cycles",
+    "version": "1.0.0",
+    "source": "inline",
+    "icon": "📐",
+    "category": "Integrations",
+    "tags": ["linear", "project-management", "integration"],
+    "author": { "name": "Drift Team" }
+  },
+  {
+    "id": "quick-actions",
+    "name": "Quick Actions",
+    "description": "Run pnpm scripts from the menu bar with one click",
+    "version": "1.0.0",
+    "source": "inline",
+    "icon": "▶️",
+    "category": "Developer Workflow",
+    "tags": ["scripts", "menu-bar", "productivity"],
+    "author": { "name": "Drift Team" }
+  },
+  {
+    "id": "verify",
+    "name": "Verify Work",
+    "description": "Read testing instructions and launch apps from the menu bar",
+    "version": "1.0.0",
+    "source": "inline",
+    "icon": "✋",
+    "category": "Developer Workflow",
+    "tags": ["testing", "verification", "menu-bar"],
+    "author": { "name": "Drift Team" }
+  }
+]
