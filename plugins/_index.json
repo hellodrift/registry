@@ -33,7 +33,7 @@
     "author": { "name": "Drift Team" }
   },
   {
-    "id": "quick-actions",
+    "id": "quick_actions",
     "name": "Quick Actions",
     "description": "Run pnpm scripts from the menu bar with one click",
     "version": "1.0.0",
