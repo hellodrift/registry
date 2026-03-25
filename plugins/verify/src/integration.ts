@@ -2,7 +2,7 @@
  * Verify Work integration — no auth needed, just schema registration.
  */
 
-import { defineIntegration } from '@vienna/sdk';
+import { defineIntegration } from '@tryvienna/sdk';
 import { registerVerifySchema } from './schema';
 
 export const verifyIntegration = defineIntegration({

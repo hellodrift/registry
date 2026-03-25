@@ -2,7 +2,7 @@
  * VerifyMenuBarIcon — Hand icon for the menu bar.
  */
 
-import type { MenuBarIconProps } from '@vienna/sdk';
+import type { MenuBarIconProps } from '@tryvienna/sdk';
 
 export function VerifyMenuBarIcon(_props: MenuBarIconProps) {
   return (

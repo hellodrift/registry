@@ -4,7 +4,7 @@
  * URI: @drift//github_workflow_run/{owner}/{repo}/{runId}
  */
 
-import { defineEntity } from '@vienna/sdk';
+import { defineEntity } from '@tryvienna/sdk';
 
 export const githubWorkflowRunEntity = defineEntity({
   type: 'github_workflow_run',

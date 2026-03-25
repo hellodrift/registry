@@ -7,7 +7,7 @@
  * If no file exists, offers to generate one via the active workstream.
  */
 
-import { definePlugin } from '@vienna/sdk';
+import { definePlugin } from '@tryvienna/sdk';
 import { verifyIntegration } from './integration';
 import { VerifyMenuBarIcon } from './ui/VerifyMenuBarIcon';
 import { VerifyMenuBarContent } from './ui/VerifyMenuBarContent';

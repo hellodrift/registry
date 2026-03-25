@@ -6,8 +6,8 @@
  */
 
 import { useCallback, useMemo } from 'react';
-import type { MenuBarCanvasProps } from '@vienna/sdk';
-import { usePluginMutation, usePluginQuery, useActiveWorkstreamId } from '@vienna/sdk/react';
+import type { MenuBarCanvasProps } from '@tryvienna/sdk';
+import { usePluginMutation, usePluginQuery, useActiveWorkstreamId } from '@tryvienna/sdk/react';
 import {
   useQuickActionsSettings,
   type QuickAction,

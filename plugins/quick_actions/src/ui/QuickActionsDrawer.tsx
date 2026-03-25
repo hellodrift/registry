@@ -8,8 +8,8 @@
  */
 
 import { useState, useMemo, useCallback } from 'react';
-import type { PluginDrawerCanvasProps } from '@vienna/sdk';
-import { usePluginQuery } from '@vienna/sdk/react';
+import type { PluginDrawerCanvasProps } from '@tryvienna/sdk';
+import { usePluginQuery } from '@tryvienna/sdk/react';
 import {
   useQuickActionsSettings,
   makeActionId,

@@ -26,12 +26,12 @@ import {
   InlineEdit,
   Combobox,
   Textarea,
-} from '@vienna/ui';
-import type { ComboboxOption } from '@vienna/ui';
+} from '@tryvienna/ui';
+import type { ComboboxOption } from '@tryvienna/ui';
 import { MessageSquare, Pencil } from 'lucide-react';
-import { parseEntityURI } from '@vienna/sdk';
-import { usePluginQuery, usePluginMutation } from '@vienna/sdk/react';
-import type { EntityDrawerProps } from '@vienna/sdk';
+import { parseEntityURI } from '@tryvienna/sdk';
+import { usePluginQuery, usePluginMutation } from '@tryvienna/sdk/react';
+import type { EntityDrawerProps } from '@tryvienna/sdk';
 import { GITHUB_URI_PATH } from '../entities/uri';
 import {
   GET_GITHUB_ISSUE,

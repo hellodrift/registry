@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
-    "@vienna/sdk": "file:../../vienna/.worktrees/integrations-v2/packages/sdk",
+    "@tryvienna/sdk": "file:../../../vienna/.worktrees/plugins/packages/sdk",
     "zod": "^3.25.67"
   },
   "devDependencies": {
@@ -28,8 +28,8 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@types/node": "^25.3.2",
     "@types/react": "^19.0.0",
-    "@vienna/graphql": "file:../../vienna/.worktrees/integrations-v2/packages/graphql",
-    "@vienna/ui": "file:../../vienna/.worktrees/integrations-v2/packages/ui",
+    "@vienna/graphql": "file:../../../vienna/.worktrees/plugins/packages/graphql",
+    "@tryvienna/ui": "file:../../../vienna/.worktrees/plugins/packages/ui",
     "graphql-tag": "^2.12.6",
     "lucide-react": "^0.500.0",
     "tsx": "^4.20.3",

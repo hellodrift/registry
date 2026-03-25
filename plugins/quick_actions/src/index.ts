@@ -9,7 +9,7 @@
  * project directories with per-action worktree/default branch config.
  */
 
-import { definePlugin } from '@vienna/sdk';
+import { definePlugin } from '@tryvienna/sdk';
 import { quickActionsIntegration } from './integration';
 import { QuickActionsMenuBarIcon } from './ui/QuickActionsMenuBarIcon';
 import { QuickActionsMenuBarContent } from './ui/QuickActionsMenuBarContent';

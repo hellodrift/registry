@@ -4,7 +4,7 @@
  * Shows a simple play icon. The host renders this inside a 32px ghost button.
  */
 
-import type { MenuBarIconProps } from '@vienna/sdk';
+import type { MenuBarIconProps } from '@tryvienna/sdk';
 
 export function QuickActionsMenuBarIcon(_props: MenuBarIconProps) {
   return (

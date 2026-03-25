@@ -15,10 +15,11 @@ import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from '@vienna/ui';
+} from '@tryvienna/ui';
 import { Terminal, FileText, ChevronDown, Sparkles, ExternalLink } from 'lucide-react';
 import { gql } from 'graphql-tag';
-import { usePluginQuery, usePluginMutation, useActiveWorkstreamId, useWorkstream } from '@vienna/sdk/react';
+import type { PluginDrawerCanvasProps } from '@tryvienna/sdk';
+import { usePluginQuery, usePluginMutation, useActiveWorkstreamId, useWorkstream } from '@tryvienna/sdk/react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GraphQL operations
@@ -123,7 +124,7 @@ function useVerifyDirectories() {
 // Footer component (rendered via DrawerCanvasConfig.footer)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export function VerifyDrawerFooter(_props: Record<string, unknown>) {
+export function VerifyDrawerFooter(_props: PluginDrawerCanvasProps) {
   const { directories, orbUrl } = useVerifyDirectories();
   const [openTerminal, { loading: terminalLoading }] = usePluginMutation(OPEN_TERMINAL);
   const [openUrl] = usePluginMutation(OPEN_URL);

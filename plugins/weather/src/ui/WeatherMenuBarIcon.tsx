@@ -5,7 +5,7 @@
  * inside the system-provided 32px ghost button.
  */
 
-import type { MenuBarIconProps } from '@vienna/sdk';
+import type { MenuBarIconProps } from '@tryvienna/sdk';
 import { useWeatherForecast } from './useWeatherForecast';
 
 export function WeatherMenuBarIcon(_props: MenuBarIconProps) {

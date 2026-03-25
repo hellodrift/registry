@@ -6,14 +6,14 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { usePluginQuery } from '@vienna/sdk/react';
+import { usePluginQuery } from '@tryvienna/sdk/react';
 import {
   NavSection,
   NavItem,
   NavSettingsButton,
   NavHeaderActions,
-} from '@vienna/ui';
-import type { NavSidebarCanvasProps } from '@vienna/sdk';
+} from '@tryvienna/ui';
+import type { NavSidebarCanvasProps } from '@tryvienna/sdk';
 import { Settings } from 'lucide-react';
 import { useLinearSettings } from './useLinearSettings';
 import { GET_LINEAR_ISSUES } from '../client/operations';

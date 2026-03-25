@@ -2,7 +2,7 @@
  * GraphQL operations for the Linear plugin UI.
  *
  * Import `gql` directly from graphql-tag (a platform external).
- * The SDK's re-export from @vienna/sdk doesn't survive the CJS eval
+ * The SDK's re-export from @tryvienna/sdk doesn't survive the CJS eval
  * context used by the plugin evaluator.
  *
  * Once codegen is set up, switch to `graphql` from './generated/gql'

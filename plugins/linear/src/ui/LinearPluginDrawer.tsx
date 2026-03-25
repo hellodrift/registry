@@ -6,8 +6,8 @@
  * - default -> Settings redirect
  */
 
-import { DrawerBody } from '@vienna/ui';
-import type { PluginDrawerCanvasProps } from '@vienna/sdk';
+import { DrawerBody } from '@tryvienna/ui';
+import type { PluginDrawerCanvasProps } from '@tryvienna/sdk';
 import { LinearSettingsDrawer } from './LinearSettingsDrawer';
 
 export function LinearPluginDrawer({

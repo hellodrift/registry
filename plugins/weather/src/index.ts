@@ -6,7 +6,7 @@
  * forecast in the drawer.
  */
 
-import { definePlugin } from '@vienna/sdk';
+import { definePlugin } from '@tryvienna/sdk';
 import { weatherApiIntegration } from './integration';
 import { WeatherPluginDrawer } from './ui/WeatherPluginDrawer';
 import { WeatherMenuBarIcon } from './ui/WeatherMenuBarIcon';

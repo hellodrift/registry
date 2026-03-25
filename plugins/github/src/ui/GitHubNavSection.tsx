@@ -5,22 +5,22 @@
  * and renders them in collapsible NavSection/NavItem tree.
  *
  * @ai-context
- * - Uses @vienna/ui NavSection/NavItem components
+ * - Uses @tryvienna/ui NavSection/NavItem components
  * - Settings opened via openPluginDrawer({ view: 'settings' })
  * - Checks credential status via hostApi.getCredentialStatus
- * - Fetches GitHub data via usePluginQuery from @vienna/sdk/react
- * - Plugin has access to shared modules: react, @vienna/ui, @vienna/sdk
+ * - Fetches GitHub data via usePluginQuery from @tryvienna/sdk/react
+ * - Plugin has access to shared modules: react, @tryvienna/ui, @tryvienna/sdk
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { usePluginQuery } from '@vienna/sdk/react';
+import { usePluginQuery } from '@tryvienna/sdk/react';
 import {
   NavSection,
   NavItem,
   NavSettingsButton,
   NavHeaderActions,
-} from '@vienna/ui';
-import type { NavSidebarCanvasProps } from '@vienna/sdk';
+} from '@tryvienna/ui';
+import type { NavSidebarCanvasProps } from '@tryvienna/sdk';
 import { GitPullRequest, CircleDot, Settings, ExternalLink } from 'lucide-react';
 import { useGitHubSettings } from './useGitHubSettings';
 import { GET_MY_PRS, GET_MY_ISSUES } from '../client/operations';

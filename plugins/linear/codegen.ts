@@ -1,3 +1,3 @@
-import { createPluginCodegenConfig } from '@vienna/sdk/codegen';
+import { createPluginCodegenConfig } from '@tryvienna/sdk/codegen';
 
 export default createPluginCodegenConfig();

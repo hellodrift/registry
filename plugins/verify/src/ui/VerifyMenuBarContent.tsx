@@ -6,7 +6,7 @@
  */
 
 import { useEffect } from 'react';
-import type { MenuBarCanvasProps } from '@vienna/sdk';
+import type { MenuBarCanvasProps } from '@tryvienna/sdk';
 
 export function VerifyMenuBarContent({ onClose, openPluginDrawer }: MenuBarCanvasProps) {
   useEffect(() => {

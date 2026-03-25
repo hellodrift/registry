@@ -4,7 +4,7 @@
  * URI: @drift//github_repo/{owner}/{name}
  */
 
-import { defineEntity } from '@vienna/sdk';
+import { defineEntity } from '@tryvienna/sdk';
 
 export const githubRepoEntity = defineEntity({
   type: 'github_repo',

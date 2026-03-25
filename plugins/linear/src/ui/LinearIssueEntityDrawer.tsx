@@ -23,12 +23,12 @@ import {
   SelectItem,
   Combobox,
   Textarea,
-} from '@vienna/ui';
-import type { ComboboxOption } from '@vienna/ui';
+} from '@tryvienna/ui';
+import type { ComboboxOption } from '@tryvienna/ui';
 import { Pencil, Trash2, ExternalLink } from 'lucide-react';
-import { parseEntityURI } from '@vienna/sdk';
-import { usePluginQuery, usePluginMutation } from '@vienna/sdk/react';
-import type { EntityDrawerProps } from '@vienna/sdk';
+import { parseEntityURI } from '@tryvienna/sdk';
+import { usePluginQuery, usePluginMutation } from '@tryvienna/sdk/react';
+import type { EntityDrawerProps } from '@tryvienna/sdk';
 import { PRIORITY_LABELS } from '../helpers';
 import { LINEAR_URI_PATH } from '../entities/uri';
 import {

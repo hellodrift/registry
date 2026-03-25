@@ -13,8 +13,8 @@
 // use `any` by design. The eslint-disable above covers the type assertions.
 
 import { GraphQLError } from 'graphql';
-import { buildEntityURI } from '@vienna/sdk';
-import type { BaseEntity } from '@vienna/sdk';
+import { buildEntityURI } from '@tryvienna/sdk';
+import type { BaseEntity } from '@tryvienna/sdk';
 import { linearIssueEntity } from './entities';
 import { linearIntegration } from './integration';
 import type { LinearClient } from '@linear/sdk';

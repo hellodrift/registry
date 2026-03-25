@@ -8,7 +8,7 @@
  */
 
 import { useMemo } from 'react';
-import { DrawerBody } from '@vienna/ui';
+import { DrawerBody } from '@tryvienna/ui';
 import type { HourlyForecast } from './weather-data';
 import { useWeatherForecast } from './useWeatherForecast';
 

@@ -5,7 +5,7 @@
  * and relies on Apollo's InMemoryCache for caching.
  */
 
-import { usePluginQuery } from '@vienna/sdk/react';
+import { usePluginQuery } from '@tryvienna/sdk/react';
 import { useWeatherSettings } from './useWeatherSettings';
 import { GET_WEATHER_FORECAST } from '../client/operations';
 

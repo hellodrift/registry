@@ -4,7 +4,7 @@
  * URI: @drift//github_pr/{owner}/{repo}/{number}
  */
 
-import { defineEntity } from '@vienna/sdk';
+import { defineEntity } from '@tryvienna/sdk';
 import { GitHubPREntityDrawer } from '../ui/GitHubPREntityDrawer';
 import { GITHUB_ENTITY_URI_SEGMENTS } from './uri';
 

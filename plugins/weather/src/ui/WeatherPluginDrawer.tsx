@@ -6,7 +6,7 @@
  * - 'settings' → Plugin settings
  */
 
-import type { PluginDrawerCanvasProps } from '@vienna/sdk';
+import type { PluginDrawerCanvasProps } from '@tryvienna/sdk';
 import { WeatherDayDrawer } from './WeatherDayDrawer';
 import { WeatherSettingsDrawer } from './WeatherSettingsDrawer';
 

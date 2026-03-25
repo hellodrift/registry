@@ -12,8 +12,8 @@
 // NOTE: Pothos builder types don't survive .d.ts boundaries. Builder callbacks
 // use `any` by design. The eslint-disable above covers the type assertions.
 import { GraphQLError } from 'graphql';
-import { buildEntityURI } from '@vienna/sdk';
-import type { BaseEntity } from '@vienna/sdk';
+import { buildEntityURI } from '@tryvienna/sdk';
+import type { BaseEntity } from '@tryvienna/sdk';
 import { githubPREntity, githubIssueEntity, githubRepoEntity, githubWorkflowRunEntity } from './entities';
 import { githubIntegration } from './integration';
 import type { Octokit } from '@octokit/rest';

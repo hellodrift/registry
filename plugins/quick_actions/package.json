@@ -16,13 +16,14 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@vienna/sdk": "file:../../vienna/.worktrees/integrations-v2/packages/sdk"
+    "@tryvienna/sdk": "file:../../../vienna/.worktrees/plugins/packages/sdk"
   },
   "devDependencies": {
+    "@tryvienna/ui": "file:../../../vienna/.worktrees/plugins/packages/ui",
     "@types/node": "^25.3.2",
     "@types/react": "^19.0.0",
-    "@vienna/graphql": "file:../../vienna/.worktrees/integrations-v2/packages/graphql",
-    "@vienna/ui": "file:../../vienna/.worktrees/integrations-v2/packages/ui",
+    "@vienna/graphql": "file:../../../vienna/.worktrees/plugins/packages/graphql",
+    "graphql": "^16.13.2",
     "typescript": "^5.9.3"
   }
 }

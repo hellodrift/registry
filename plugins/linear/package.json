@@ -19,20 +19,21 @@
   },
   "dependencies": {
     "@linear/sdk": "^29.0.0",
-    "@vienna/sdk": "file:../../vienna/.worktrees/integrations-v2/packages/sdk",
+    "@tryvienna/sdk": "file:../../../vienna/.worktrees/plugins/packages/sdk",
     "zod": "^3.25.67"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^6.1.2",
     "@graphql-codegen/client-preset": "^5.2.3",
     "@graphql-typed-document-node/core": "^3.2.0",
+    "@tryvienna/ui": "file:../../../vienna/.worktrees/plugins/packages/ui",
     "@types/node": "^25.3.2",
     "@types/react": "^19.0.0",
-    "@vienna/graphql": "file:../../vienna/.worktrees/integrations-v2/packages/graphql",
-    "@vienna/ui": "file:../../vienna/.worktrees/integrations-v2/packages/ui",
+    "@vienna/graphql": "file:../../../vienna/.worktrees/plugins/packages/graphql",
     "graphql-tag": "^2.12.6",
     "lucide-react": "^0.500.0",
     "tsx": "^4.20.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.1"
   }
 }

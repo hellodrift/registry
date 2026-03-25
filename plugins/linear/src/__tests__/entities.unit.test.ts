@@ -15,9 +15,9 @@ describe('linearIssueEntity', () => {
   });
 
   it('has display colors', () => {
-    expect(linearIssueEntity.display.colors.bg).toBe('#5E6AD2');
-    expect(linearIssueEntity.display.colors.text).toBe('#FFFFFF');
-    expect(linearIssueEntity.display.colors.border).toBe('#4E5BBF');
+    expect(linearIssueEntity.display!.colors.bg).toBe('#5E6AD2');
+    expect(linearIssueEntity.display!.colors.text).toBe('#FFFFFF');
+    expect(linearIssueEntity.display!.colors.border).toBe('#4E5BBF');
   });
 
   it('has cache configuration', () => {
@@ -25,7 +25,7 @@ describe('linearIssueEntity', () => {
   });
 
   it('has output fields', () => {
-    const fieldKeys = linearIssueEntity.display.outputFields?.map((f) => f.key);
+    const fieldKeys = linearIssueEntity.display!.outputFields?.map((f) => f.key);
     expect(fieldKeys).toContain('identifier');
     expect(fieldKeys).toContain('status');
     expect(fieldKeys).toContain('priority');

@@ -8,12 +8,12 @@
  * - Uses Apollo useQuery for repo fetching (githubRepos query)
  * - Uses localStorage-based useGitHubSettings for filter persistence
  * - Credentials managed via hostApi.setCredential/removeCredential (IPC-backed)
- * - All UI from @vienna/ui for consistency
+ * - All UI from @tryvienna/ui for consistency
  * - Rendered inside GitHubPluginDrawer when payload.view === 'settings'
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { usePluginQuery } from '@vienna/sdk';
+import { usePluginQuery } from '@tryvienna/sdk';
 import { gql } from 'graphql-tag';
 import {
   ContentSection,
@@ -26,8 +26,8 @@ import {
   Input,
   Label,
   Combobox,
-} from '@vienna/ui';
-import type { PluginHostApi, CanvasLogger, OAuthProviderStatusEntry } from '@vienna/sdk';
+} from '@tryvienna/ui';
+import type { PluginHostApi, CanvasLogger, OAuthProviderStatusEntry } from '@tryvienna/sdk';
 import { KeyRound, Check, Trash2, Eye, EyeOff, X, Shield, ExternalLink, Unplug } from 'lucide-react';
 import { useGitHubSettings, type GitHubSettings } from './useGitHubSettings';
 
@@ -75,7 +75,7 @@ interface RepoShape {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CredentialField — Uses @vienna/ui components exclusively
+// CredentialField — Uses @tryvienna/ui components exclusively
 // ─────────────────────────────────────────────────────────────────────────────
 
 function CredentialField({

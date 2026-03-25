@@ -11,8 +11,8 @@
  * resolves these at flow time from the integration's scoped secure storage.
  */
 
-import { defineIntegration } from '@vienna/sdk';
-import type { IntegrationDefinition } from '@vienna/sdk';
+import { defineIntegration } from '@tryvienna/sdk';
+import type { IntegrationDefinition } from '@tryvienna/sdk';
 import type { LinearClient } from '@linear/sdk';
 import { registerLinearSchema } from './schema';
 

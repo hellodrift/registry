@@ -1,4 +1,4 @@
-import { defineEntity } from '@vienna/sdk';
+import { defineEntity } from '@tryvienna/sdk';
 import { LINEAR_ENTITY_URI_SEGMENTS } from './uri';
 import { LinearIssueEntityDrawer } from '../ui/LinearIssueEntityDrawer';
 

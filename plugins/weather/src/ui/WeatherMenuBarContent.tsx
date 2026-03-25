@@ -5,7 +5,7 @@
  * and a settings gear to configure location/units.
  */
 
-import type { MenuBarCanvasProps } from '@vienna/sdk';
+import type { MenuBarCanvasProps } from '@tryvienna/sdk';
 import { useWeatherForecast } from './useWeatherForecast';
 
 export function WeatherMenuBarContent({ openPluginDrawer }: MenuBarCanvasProps) {

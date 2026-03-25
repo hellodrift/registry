@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { usePluginQuery } from '@vienna/sdk/react';
+import { usePluginQuery } from '@tryvienna/sdk/react';
 import {
   DrawerBody,
   ContentSection,
@@ -19,7 +19,7 @@ import {
   SelectItem,
   Button,
   Input,
-} from '@vienna/ui';
+} from '@tryvienna/ui';
 import { useWeatherSettings } from './useWeatherSettings';
 import { SEARCH_WEATHER_LOCATIONS } from '../client/operations';
 

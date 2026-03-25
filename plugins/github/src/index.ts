@@ -6,11 +6,11 @@
  * - Entity definitions (PRs, Issues, Workflow Runs, Repositories)
  * - GraphQL schema extension
  *
- * Dependencies: @vienna/sdk, @octokit/rest, zod.
+ * Dependencies: @tryvienna/sdk, @octokit/rest, zod.
  * No imports from Vienna internals (renderer, IPC, etc.).
  */
 
-import { definePlugin } from '@vienna/sdk';
+import { definePlugin } from '@tryvienna/sdk';
 import { githubIntegration } from './integration';
 import {
   githubPREntity,

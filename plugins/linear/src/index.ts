@@ -1,4 +1,4 @@
-import { definePlugin } from '@vienna/sdk';
+import { definePlugin } from '@tryvienna/sdk';
 import { linearIntegration } from './integration';
 import { linearIssueEntity } from './entities';
 import { LinearNavSection } from './ui/LinearNavSection';

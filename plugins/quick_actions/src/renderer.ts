@@ -8,7 +8,7 @@
  * integrations and schema resolvers that use Node built-ins.
  */
 
-import { definePlugin } from '@vienna/sdk';
+import { definePlugin } from '@tryvienna/sdk';
 import { QuickActionsMenuBarIcon } from './ui/QuickActionsMenuBarIcon';
 import { QuickActionsMenuBarContent } from './ui/QuickActionsMenuBarContent';
 import { QuickActionsDrawer } from './ui/QuickActionsDrawer';

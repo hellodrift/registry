@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { usePluginQuery } from '@vienna/sdk/react';
+import { usePluginQuery } from '@tryvienna/sdk/react';
 import {
   ContentSection,
   Select,
@@ -18,8 +18,8 @@ import {
   Input,
   Label,
   Checkbox,
-} from '@vienna/ui';
-import type { PluginHostApi, CanvasLogger, OAuthProviderStatusEntry } from '@vienna/sdk';
+} from '@tryvienna/ui';
+import type { PluginHostApi, CanvasLogger, OAuthProviderStatusEntry } from '@tryvienna/sdk';
 import { KeyRound, Check, Trash2, Eye, EyeOff, X, ExternalLink, Unplug } from 'lucide-react';
 import { useLinearSettings, type LinearSettings } from './useLinearSettings';
 import { GET_LINEAR_TEAMS } from '../client/operations';

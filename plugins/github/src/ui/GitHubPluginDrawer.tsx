@@ -11,8 +11,8 @@
  * Opened from the nav section's gear icon via `openPluginDrawer({ view: 'settings' })`.
  */
 
-import { DrawerBody } from '@vienna/ui';
-import type { PluginDrawerCanvasProps } from '@vienna/sdk';
+import { DrawerBody } from '@tryvienna/ui';
+import type { PluginDrawerCanvasProps } from '@tryvienna/sdk';
 import { GitHubSettingsDrawer } from './GitHubSettingsDrawer';
 
 export function GitHubPluginDrawer({
