@@ -78,12 +78,12 @@ export type GetProjectDirsVars = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Workstream Directories (existing schema query, provides effectivePath)
+// Workstream Directories with branch info (provides effectivePath for worktrees)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const GET_WORKSTREAM_DIRS = parse(`
   query GetWorkstreamDirsForQuickActions($workstreamId: ID!) {
-    workstreamDirectories(workstreamId: $workstreamId) {
+    directoriesWithBranchInfo(workstreamId: $workstreamId) {
       path
       effectivePath
     }
@@ -91,7 +91,7 @@ export const GET_WORKSTREAM_DIRS = parse(`
 `);
 
 export type GetWorkstreamDirsData = {
-  workstreamDirectories: Array<{ path: string; effectivePath: string }>;
+  directoriesWithBranchInfo: Array<{ path: string; effectivePath: string }>;
 };
 
 export type GetWorkstreamDirsVars = {

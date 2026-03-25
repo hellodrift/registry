@@ -36,7 +36,7 @@ export function QuickActionsMenuBarContent({ onClose, openPluginDrawer, logger }
   // action.directory is a subdirectory (e.g. /repo/apps/desktop) while workstream
   // directories are project roots (e.g. /repo), so we need prefix matching.
   const worktreeDirs = useMemo(
-    () => (worktreeDirsData?.workstreamDirectories ?? [])
+    () => (worktreeDirsData?.directoriesWithBranchInfo ?? [])
       .filter((d) => d.path !== d.effectivePath)
       .sort((a, b) => b.path.length - a.path.length), // longest prefix first
     [worktreeDirsData],
