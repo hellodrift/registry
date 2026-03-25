@@ -7,20 +7,40 @@
 
 import { useCallback, useMemo } from 'react';
 import type { MenuBarCanvasProps } from '@vienna/sdk';
-import { usePluginMutation } from '@vienna/sdk/react';
+import { usePluginMutation, usePluginQuery, useActiveWorkstreamId } from '@vienna/sdk/react';
 import {
   useQuickActionsSettings,
   type QuickAction,
 } from './useQuickActionsSettings';
 import {
   RUN_QUICK_ACTION,
+  GET_WORKSTREAM_DIRS,
   type RunQuickActionData,
   type RunQuickActionVars,
+  type GetWorkstreamDirsData,
+  type GetWorkstreamDirsVars,
 } from '../client/operations';
 
 export function QuickActionsMenuBarContent({ onClose, openPluginDrawer, logger }: MenuBarCanvasProps) {
   const { actions } = useQuickActionsSettings();
   const [runAction] = usePluginMutation<RunQuickActionData, RunQuickActionVars>(RUN_QUICK_ACTION);
+  const activeWorkstreamId = useActiveWorkstreamId();
+
+  // Fetch worktree directory mappings for the active workstream
+  const { data: worktreeDirsData } = usePluginQuery<GetWorkstreamDirsData, GetWorkstreamDirsVars>(
+    GET_WORKSTREAM_DIRS,
+    { variables: { workstreamId: activeWorkstreamId! }, skip: !activeWorkstreamId },
+  );
+
+  // Build a list of path → effectivePath mappings for prefix-based resolution.
+  // action.directory is a subdirectory (e.g. /repo/apps/desktop) while workstream
+  // directories are project roots (e.g. /repo), so we need prefix matching.
+  const worktreeDirs = useMemo(
+    () => (worktreeDirsData?.workstreamDirectories ?? [])
+      .filter((d) => d.path !== d.effectivePath)
+      .sort((a, b) => b.path.length - a.path.length), // longest prefix first
+    [worktreeDirsData],
+  );
 
   // Group actions by directory label
   const groupedActions = useMemo(() => {
@@ -36,8 +56,17 @@ export function QuickActionsMenuBarContent({ onClose, openPluginDrawer, logger }
 
   const handleRun = useCallback(
     async (action: QuickAction) => {
-      // For now, use the directory as-is. Worktree resolution happens in settings.
-      const cwd = action.directory;
+      // Resolve cwd: replace the project root prefix with the worktree effectivePath.
+      // e.g. /repo/apps/desktop → /repo/.worktrees/branch/apps/desktop
+      let cwd = action.directory;
+      if (action.runContext === 'active-worktree') {
+        for (const dir of worktreeDirs) {
+          if (action.directory.startsWith(dir.path)) {
+            cwd = dir.effectivePath + action.directory.slice(dir.path.length);
+            break;
+          }
+        }
+      }
       onClose();
 
       logger.info('Running quick action', { script: action.script, cwd });
@@ -51,7 +80,7 @@ export function QuickActionsMenuBarContent({ onClose, openPluginDrawer, logger }
         logger.error('Quick action error', { error: err instanceof Error ? err.message : String(err) });
       }
     },
-    [onClose, runAction, logger],
+    [onClose, runAction, logger, worktreeDirs],
   );
 
   if (actions.length === 0) {

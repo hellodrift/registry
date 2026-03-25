@@ -47,7 +47,9 @@ export function runScriptInTerminal(
     const os = platform();
 
     if (os === 'darwin') {
-      openMacTerminal(`cd '${cwd.replace(/'/g, "'\\''")}' && ${command}`);
+      // Unset ESBUILD_BINARY_PATH — the packaged Electron app sets this to its
+      // bundled esbuild, which breaks dev builds run in an external terminal.
+      openMacTerminal(`unset ESBUILD_BINARY_PATH; cd '${cwd.replace(/'/g, "'\\''")}' && ${command}`);
     } else if (os === 'win32') {
       spawn('cmd.exe', ['/c', 'start', 'cmd.exe', '/k', `cd /d "${cwd}" && ${command}`], {
         detached: true,
