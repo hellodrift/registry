@@ -42,16 +42,5 @@
     "category": "Developer Workflow",
     "tags": ["scripts", "menu-bar", "productivity"],
     "author": { "name": "Drift Team" }
-  },
-  {
-    "id": "verify",
-    "name": "Verify Work",
-    "description": "Read testing instructions and launch apps from the menu bar",
-    "version": "0.0.1",
-    "source": "inline",
-    "icon": "✋",
-    "category": "Developer Workflow",
-    "tags": ["testing", "verification", "menu-bar"],
-    "author": { "name": "Drift Team" }
   }
 ]
