@@ -1,4 +1,4 @@
 {
   "version": 1,
-  "defaults": ["weather", "quick_actions", "verify"]
+  "defaults": ["weather", "quick_actions"]
 }
