@@ -1,5 +1,16 @@
 [
   {
+    "id": "plugin-dev",
+    "name": "Plugin Development",
+    "description": "Build Vienna plugins — scaffold with vcli, then implement integrations, entities, sidebar/drawer/menu-bar canvases, and GraphQL schemas",
+    "version": "2.0.0",
+    "source": "inline",
+    "icon": "\ud83e\udde9",
+    "category": "Development",
+    "tags": ["plugins", "development", "vienna", "scaffold", "integration", "entity"],
+    "author": { "name": "Drift Team" }
+  },
+  {
     "id": "commit",
     "name": "Commit",
     "description": "Create clean, well-structured git commits with conventional commit messages",

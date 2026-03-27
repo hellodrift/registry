@@ -1,0 +1,21 @@
+{
+  "name": "vcli",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Vienna plugin scaffolding CLI",
+  "type": "module",
+  "bin": {
+    "vcli": "./bin/vcli.mjs"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --experimental-transform-types --test src/__tests__/*.test.ts"
+  },
+  "dependencies": {
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  }
+}
