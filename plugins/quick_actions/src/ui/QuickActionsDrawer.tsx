@@ -159,14 +159,15 @@ export function QuickActionsDrawer(_props: PluginDrawerCanvasProps) {
                     >
                       <path d="m9 18 6-6-6-6" />
                     </svg>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 text-muted-foreground">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 text-blue-400">
                       <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
                     </svg>
                     <span className="text-xs font-medium text-muted-foreground flex-1 text-left">
                       {pkg.label}
                     </span>
                     {enabledCount > 0 && (
-                      <span className="text-[10px] text-muted-foreground tabular-nums">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-medium text-emerald-400 border border-emerald-500/20 tabular-nums">
+                        <span className="size-1.5 rounded-full bg-emerald-400" />
                         {enabledCount} active
                       </span>
                     )}

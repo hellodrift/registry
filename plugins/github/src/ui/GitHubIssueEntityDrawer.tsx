@@ -55,9 +55,9 @@ function SavingBar({ visible }: { visible: boolean }) {
   );
 }
 
-const STATE_STYLES: Record<string, { bg: string; label: string }> = {
-  open: { bg: '#238636', label: 'Open' },
-  closed: { bg: '#8250df', label: 'Closed' },
+const STATE_STYLES: Record<string, { className: string; label: string }> = {
+  open: { className: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20', label: 'Open' },
+  closed: { className: 'bg-violet-500/15 text-violet-400 border border-violet-500/20', label: 'Closed' },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -65,12 +65,12 @@ const STATE_STYLES: Record<string, { bg: string; label: string }> = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function StateBadge({ state }: { state: string }) {
-  const style = STATE_STYLES[state] ?? { bg: '#6e7781', label: state };
+  const style = STATE_STYLES[state] ?? { className: 'bg-muted text-muted-foreground', label: state };
   return (
     <span
-      className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium text-white"
-      style={{ backgroundColor: style.bg }}
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${style.className}`}
     >
+      {state === 'open' && <span className="size-1.5 rounded-full bg-emerald-400" />}
       {style.label}
     </span>
   );
@@ -291,11 +291,12 @@ export function GitHubIssueEntityDrawer({ uri, headerActions, DrawerContainer }:
       headerActions={headerActions}
       footer={
         <DrawerPanelFooter>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-2">
             {isOpen ? (
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
+                className="text-destructive hover:text-destructive hover:bg-destructive/10"
                 disabled={updateLoading}
                 onClick={() => setCloseDialogOpen(true)}
               >
@@ -312,7 +313,7 @@ export function GitHubIssueEntityDrawer({ uri, headerActions, DrawerContainer }:
               </Button>
             )}
             {issue.url && (
-              <Button variant="ghost" size="sm" asChild>
+              <Button variant="outline" size="sm" asChild>
                 <a href={issue.url} target="_blank" rel="noopener noreferrer">
                   Open on GitHub
                 </a>

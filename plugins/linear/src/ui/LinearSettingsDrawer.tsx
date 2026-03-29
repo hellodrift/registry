@@ -96,13 +96,13 @@ function CredentialField({
     <div className="rounded-lg border border-border bg-card p-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <KeyRound size={14} className="text-muted-foreground" />
+          <KeyRound size={14} className="text-amber-400" />
           <Label className="text-xs font-medium">{label}</Label>
         </div>
         <div className="flex items-center gap-1">
           {isSet && !editing && (
             <>
-              <span className="flex items-center gap-1 rounded-full bg-green-500/10 px-2 py-0.5 text-[10px] font-medium text-green-600 dark:text-green-400">
+              <span className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-medium text-emerald-400 border border-emerald-500/20">
                 <Check size={10} />
                 Set
               </span>
@@ -175,10 +175,10 @@ function OAuthConnectButton({
 }) {
   if (connected) {
     return (
-      <div className="flex items-center justify-between rounded-lg border border-green-500/20 bg-green-500/5 p-3">
+      <div className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3">
         <div className="flex items-center gap-2">
-          <Check size={14} className="text-green-600 dark:text-green-400" />
-          <span className="text-xs font-medium text-green-600 dark:text-green-400">Connected via OAuth</span>
+          <span className="size-1.5 rounded-full bg-emerald-400" />
+          <span className="text-xs font-medium text-emerald-400">Connected via OAuth</span>
         </div>
         <Button
           variant="ghost"

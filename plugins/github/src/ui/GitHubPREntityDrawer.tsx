@@ -56,10 +56,10 @@ function SavingBar({ visible }: { visible: boolean }) {
   );
 }
 
-const STATE_STYLES: Record<string, { bg: string; label: string }> = {
-  open: { bg: '#238636', label: 'Open' },
-  closed: { bg: '#cf222e', label: 'Closed' },
-  merged: { bg: '#8250df', label: 'Merged' },
+const STATE_STYLES: Record<string, { className: string; label: string }> = {
+  open: { className: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20', label: 'Open' },
+  closed: { className: 'bg-red-500/15 text-red-400 border border-red-500/20', label: 'Closed' },
+  merged: { className: 'bg-violet-500/15 text-violet-400 border border-violet-500/20', label: 'Merged' },
 };
 
 const REVIEW_STYLES: Record<string, { variant: 'default' | 'secondary' | 'outline' | 'destructive'; label: string }> = {
@@ -82,13 +82,14 @@ const CHECKS_STYLES: Record<string, { variant: 'default' | 'secondary' | 'outlin
 // ─────────────────────────────────────────────────────────────────────────────
 
 function StateBadge({ state, draft }: { state: string; draft?: boolean | null }) {
-  const style = STATE_STYLES[state] ?? { bg: '#6e7781', label: state };
+  const style = STATE_STYLES[state] ?? { className: 'bg-muted text-muted-foreground', label: state };
   const label = draft ? 'Draft' : style.label;
+  const badgeClass = draft ? 'bg-muted text-muted-foreground border border-border' : style.className;
   return (
     <span
-      className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium text-white"
-      style={{ backgroundColor: style.bg }}
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${badgeClass}`}
     >
+      {state === 'open' && !draft && <span className="size-1.5 rounded-full bg-emerald-400" />}
       {label}
     </span>
   );
@@ -273,60 +274,66 @@ export function GitHubPREntityDrawer({ uri, headerActions, DrawerContainer }: En
       footer={
         isOpen ? (
           <DrawerPanelFooter>
-            <div className="flex items-center gap-2">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span>
-                    <Button
-                      size="sm"
-                      disabled={actionLoading || pr.mergeable === false}
-                      onClick={() => setMergeDialogOpen(true)}
-                    >
-                      Merge
-                    </Button>
-                  </span>
-                </TooltipTrigger>
-                {pr.mergeable === false && (
-                  <TooltipContent>This PR has merge conflicts or is not mergeable</TooltipContent>
-                )}
-              </Tooltip>
+            <div className="flex items-center justify-between gap-2">
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
+                className="text-destructive hover:text-destructive hover:bg-destructive/10"
                 disabled={actionLoading}
                 onClick={() => setCloseDialogOpen(true)}
               >
                 Close
               </Button>
-              {pr.url && (
-                <Button variant="ghost" size="sm" asChild>
-                  <a href={pr.url} target="_blank" rel="noopener noreferrer">
-                    Open on GitHub
-                  </a>
-                </Button>
-              )}
+              <div className="flex items-center gap-2">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span>
+                      <Button
+                        size="sm"
+                        disabled={actionLoading || pr.mergeable === false}
+                        onClick={() => setMergeDialogOpen(true)}
+                      >
+                        Merge
+                      </Button>
+                    </span>
+                  </TooltipTrigger>
+                  {pr.mergeable === false && (
+                    <TooltipContent>This PR has merge conflicts or is not mergeable</TooltipContent>
+                  )}
+                </Tooltip>
+                {pr.url && (
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={pr.url} target="_blank" rel="noopener noreferrer">
+                      Open on GitHub
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
           </DrawerPanelFooter>
         ) : (
           <DrawerPanelFooter>
-            <div className="flex items-center gap-2">
-              {!isMerged && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={actionLoading}
-                  onClick={handleReopen}
-                >
-                  Reopen
-                </Button>
-              )}
-              {pr.url && (
-                <Button variant="ghost" size="sm" asChild>
-                  <a href={pr.url} target="_blank" rel="noopener noreferrer">
-                    Open on GitHub
-                  </a>
-                </Button>
-              )}
+            <div className="flex items-center justify-between gap-2">
+              <div />
+              <div className="flex items-center gap-2">
+                {!isMerged && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={actionLoading}
+                    onClick={handleReopen}
+                  >
+                    Reopen
+                  </Button>
+                )}
+                {pr.url && (
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={pr.url} target="_blank" rel="noopener noreferrer">
+                      Open on GitHub
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
           </DrawerPanelFooter>
         )
