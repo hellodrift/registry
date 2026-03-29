@@ -44,14 +44,14 @@
     "author": { "name": "Drift Team" }
   },
   {
-    "id": "profile_badge",
-    "name": "Profile Badge",
-    "description": "Shows the active content profile in the menu bar",
+    "id": "reddit",
+    "name": "Reddit",
+    "description": "Monitor subreddits for engagement opportunities and draft AI-assisted replies",
     "version": "0.0.1",
     "source": "inline",
-    "icon": "👤",
-    "category": "Utilities",
-    "tags": ["profiles", "menu-bar"],
+    "icon": "🤖",
+    "category": "Community",
+    "tags": ["reddit", "community", "engagement", "integration"],
     "author": { "name": "Drift Team" }
   }
 ]
