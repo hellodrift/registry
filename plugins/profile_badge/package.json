@@ -1,0 +1,20 @@
+{
+  "name": "plugin-profile-badge",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shows the active content profile in the menu bar",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@tryvienna/sdk": "file:../../../vienna/.worktrees/plugins/packages/sdk",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "@types/react": "^19.0.0",
+    "@tryvienna/ui": "file:../../../vienna/.worktrees/plugins/packages/ui",
+    "typescript": "^5.9.3"
+  }
+}

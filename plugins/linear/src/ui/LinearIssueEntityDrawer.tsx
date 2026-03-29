@@ -295,24 +295,24 @@ export function LinearIssueEntityDrawer({ uri, headerActions, DrawerContainer, o
       headerActions={headerActions}
       footer={
         <DrawerPanelFooter>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-destructive hover:text-destructive hover:bg-destructive/10"
+              onClick={() => setDeleteDialogOpen(true)}
+            >
+              <Trash2 size={12} className="mr-1" />
+              Delete
+            </Button>
             {issue.url && (
-              <Button variant="ghost" size="sm" asChild>
+              <Button variant="outline" size="sm" asChild>
                 <a href={issue.url} target="_blank" rel="noopener noreferrer">
                   <ExternalLink size={12} className="mr-1" />
                   Open in Linear
                 </a>
               </Button>
             )}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-destructive"
-              onClick={() => setDeleteDialogOpen(true)}
-            >
-              <Trash2 size={12} className="mr-1" />
-              Delete
-            </Button>
           </div>
         </DrawerPanelFooter>
       }
@@ -323,7 +323,7 @@ export function LinearIssueEntityDrawer({ uri, headerActions, DrawerContainer, o
 
           {/* Header: identifier + status */}
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium text-white" style={{ backgroundColor: '#5E6AD2' }}>
+            <span className="inline-flex items-center rounded-full bg-violet-500/15 text-violet-400 border border-violet-500/20 px-2 py-0.5 text-[11px] font-medium">
               {issue.identifier}
             </span>
             {issue.stateName && (

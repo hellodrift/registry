@@ -53,5 +53,16 @@
     "category": "Developer Workflow",
     "tags": ["scripts", "menu-bar", "productivity"],
     "author": { "name": "Drift Team" }
+  },
+  {
+    "id": "profile_badge",
+    "name": "Profile Badge",
+    "description": "Shows the active content profile in the menu bar",
+    "version": "0.0.1",
+    "source": "inline",
+    "icon": "👤",
+    "category": "Utilities",
+    "tags": ["profiles", "menu-bar"],
+    "author": { "name": "Drift Team" }
   }
 ]
