@@ -1,0 +1,28 @@
+{
+  "name": "plugin-feedback",
+  "version": "0.0.1",
+  "private": true,
+  "description": "User feedback monitoring plugin for Vienna — view, track, and escalate feedback",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts",
+    "./ui": "./src/ui/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tryvienna/sdk": "file:../../../vienna/.worktrees/plugins/packages/sdk",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@tryvienna/ui": "file:../../../vienna/.worktrees/plugins/packages/ui",
+    "@vienna/graphql": "file:../../../vienna/.worktrees/plugins/packages/graphql",
+    "graphql-tag": "^2.12.6",
+    "lucide-react": "^0.500.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.1"
+  }
+}
