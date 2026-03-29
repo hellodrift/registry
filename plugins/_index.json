@@ -33,6 +33,17 @@
     "author": { "name": "Drift Team" }
   },
   {
+    "id": "google_workspace",
+    "name": "Google Workspace",
+    "description": "Gmail, Calendar, and Drive — powered by the gws CLI",
+    "version": "0.0.1",
+    "source": "inline",
+    "icon": "📧",
+    "category": "Integrations",
+    "tags": ["google", "gmail", "calendar", "drive", "integration"],
+    "author": { "name": "Drift Team" }
+  },
+  {
     "id": "quick_actions",
     "name": "Quick Actions",
     "description": "Run pnpm scripts from the menu bar with one click",
