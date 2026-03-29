@@ -202,14 +202,14 @@ export function registerGoogleWorkspaceSchema(rawBuilder: unknown): void {
       description: 'List Gmail threads. Returns empty array if not authenticated.',
       args: {
         query: t.arg.string({ description: 'Gmail search query (e.g. "is:unread", "from:alice@")' }),
-        limit: t.arg.int({ defaultValue: 20, description: 'Max threads to return' }),
+        limit: t.arg.int({ defaultValue: 20, description: 'Max threads to return (1-100)' }),
       },
       resolve: async (_root, args, ctx) => {
         const client = await getGwsClientOrNull(ctx);
         if (!client) return [];
         return api.listThreads(client, {
           query: args.query ?? undefined,
-          maxResults: args.limit ?? 20,
+          maxResults: Math.min(Math.max(args.limit ?? 20, 1), 100),
         });
       },
     }),
@@ -244,7 +244,7 @@ export function registerGoogleWorkspaceSchema(rawBuilder: unknown): void {
         timeMin: t.arg.string({ description: 'Start of time range (ISO 8601)' }),
         timeMax: t.arg.string({ description: 'End of time range (ISO 8601)' }),
         query: t.arg.string({ description: 'Free-text search query' }),
-        limit: t.arg.int({ defaultValue: 20, description: 'Max events to return' }),
+        limit: t.arg.int({ defaultValue: 20, description: 'Max events to return (1-100)' }),
       },
       resolve: async (_root, args, ctx) => {
         const client = await getGwsClientOrNull(ctx);
@@ -253,7 +253,7 @@ export function registerGoogleWorkspaceSchema(rawBuilder: unknown): void {
           timeMin: args.timeMin ?? undefined,
           timeMax: args.timeMax ?? undefined,
           query: args.query ?? undefined,
-          maxResults: args.limit ?? 20,
+          maxResults: Math.min(Math.max(args.limit ?? 20, 1), 100),
         });
       },
     }),
@@ -276,14 +276,14 @@ export function registerGoogleWorkspaceSchema(rawBuilder: unknown): void {
       description: 'List Google Drive files. Returns empty array if not authenticated.',
       args: {
         query: t.arg.string({ description: 'Drive search query (e.g. "name contains \'report\'")' }),
-        limit: t.arg.int({ defaultValue: 20, description: 'Max files to return' }),
+        limit: t.arg.int({ defaultValue: 20, description: 'Max files to return (1-100)' }),
       },
       resolve: async (_root, args, ctx) => {
         const client = await getGwsClientOrNull(ctx);
         if (!client) return [];
         return api.listFiles(client, {
           query: args.query ?? undefined,
-          pageSize: args.limit ?? 20,
+          pageSize: Math.min(Math.max(args.limit ?? 20, 1), 100),
         });
       },
     }),
@@ -459,7 +459,9 @@ export function registerGoogleWorkspaceSchema(rawBuilder: unknown): void {
       const client = ctx.integrations.google_workspace.client as GwsClient;
       if (!client) return [];
       try {
-        const searchQuery = query.query ? `name contains '${query.query.replace(/'/g, "\\'")}'` : undefined;
+        // Sanitize user input for Drive API query: strip everything except alphanumeric, spaces, hyphens, underscores, dots
+        const sanitized = query.query ? query.query.replace(/[^a-zA-Z0-9\s\-_.]/g, '') : '';
+        const searchQuery = sanitized ? `name contains '${sanitized}'` : undefined;
         const files = await api.listFiles(client, {
           query: searchQuery,
           pageSize: query.limit ?? 20,

@@ -70,15 +70,16 @@ export async function listThreads(
         try {
           const full = await client.gmailThreadsGetMetadata(stub.id);
           return rawThreadToShape(full);
-        } catch {
-          // Fall back to stub data if individual fetch fails
+        } catch (fetchErr) {
+          // Fall back to stub data — log so degraded results are visible
+          console.warn(`[google_workspace] Failed to fetch thread metadata for ${stub.id}:`, fetchErr);
           return rawThreadToShape(stub);
         }
       }),
     );
     return threads;
   } catch (err) {
-    wrapGwsError(err, 'listThreads');
+    throw wrapGwsError(err, 'listThreads');
   }
 }
 
@@ -91,7 +92,7 @@ export async function getThread(
     const result = await client.gmailThreadsGetFull(input.threadId);
     return rawThreadToShape(result);
   } catch (err) {
-    wrapGwsError(err, 'getThread');
+    throw wrapGwsError(err, 'getThread');
   }
 }
 
@@ -103,7 +104,7 @@ export async function getMessage(
     const result = await client.gmailMessagesGet(input.messageId);
     return rawMessageToShape(result);
   } catch (err) {
-    wrapGwsError(err, 'getMessage');
+    throw wrapGwsError(err, 'getMessage');
   }
 }
 
@@ -115,7 +116,7 @@ export async function sendEmail(
     await client.gmailSend(input.to, input.subject, input.body);
     return { success: true, message: 'Email sent successfully' };
   } catch (err) {
-    wrapGwsError(err, 'sendEmail');
+    throw wrapGwsError(err, 'sendEmail');
   }
 }
 
@@ -128,7 +129,7 @@ export async function getAgenda(client: GwsClient): Promise<CalendarEventShape[]
     const result = await client.calendarAgenda();
     return result.events.map(rawAgendaEventToShape);
   } catch (err) {
-    wrapGwsError(err, 'getAgenda');
+    throw wrapGwsError(err, 'getAgenda');
   }
 }
 
@@ -147,7 +148,7 @@ export async function listEvents(
     const result = await client.calendarEventsList(params);
     return result.items.map(rawEventToShape);
   } catch (err) {
-    wrapGwsError(err, 'listEvents');
+    throw wrapGwsError(err, 'listEvents');
   }
 }
 
@@ -159,7 +160,7 @@ export async function getEvent(
     const result = await client.calendarEventsGet(input.eventId);
     return rawEventToShape(result);
   } catch (err) {
-    wrapGwsError(err, 'getEvent');
+    throw wrapGwsError(err, 'getEvent');
   }
 }
 
@@ -171,7 +172,7 @@ export async function createEvent(
     await client.calendarInsertEvent(input);
     return { success: true, message: 'Event created successfully' };
   } catch (err) {
-    wrapGwsError(err, 'createEvent');
+    throw wrapGwsError(err, 'createEvent');
   }
 }
 
@@ -195,7 +196,7 @@ export async function listFiles(
     const result = await client.driveFilesList(params);
     return result.files.map(rawFileToShape);
   } catch (err) {
-    wrapGwsError(err, 'listFiles');
+    throw wrapGwsError(err, 'listFiles');
   }
 }
 
@@ -210,6 +211,6 @@ export async function getFile(
     );
     return rawFileToShape(result);
   } catch (err) {
-    wrapGwsError(err, 'getFile');
+    throw wrapGwsError(err, 'getFile');
   }
 }

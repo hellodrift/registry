@@ -64,7 +64,7 @@ export function GoogleWorkspaceNavSection({
     if (settings.driveQuery) {
       parts.push(settings.driveQuery);
     }
-    if (settings.driveMimeFilter && settings.driveMimeFilter !== 'all') {
+    if (settings.driveMimeFilter && settings.driveMimeFilter !== 'all' && /^[a-zA-Z0-9.\/\-]+$/.test(settings.driveMimeFilter)) {
       parts.push(`mimeType='${settings.driveMimeFilter}'`);
     }
     return parts.length > 0 ? parts.join(' and ') : undefined;

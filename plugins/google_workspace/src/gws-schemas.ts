@@ -4,6 +4,10 @@
  * These define the contract between the plugin and the gws binary.
  * Each schema matches the actual JSON structure returned by a specific
  * gws command (verified against gws 0.16.0).
+ *
+ * Note: Response schemas use `.passthrough()` intentionally — this allows
+ * forward compatibility with newer gws versions that may add fields without
+ * requiring a plugin update. Unknown fields pass through validation untouched.
  */
 
 import { z } from 'zod';

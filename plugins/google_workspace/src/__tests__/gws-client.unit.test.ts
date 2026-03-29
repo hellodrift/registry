@@ -79,11 +79,10 @@ describe('GwsClient.exec', () => {
     expect(result).toEqual({ count: 5 });
   });
 
-  it('returns empty object for empty stdout', async () => {
+  it('throws on empty stdout', async () => {
     mockExecFile('');
     const client = new GwsClient();
-    const result = await client.exec(['some', 'command']);
-    expect(result).toEqual({});
+    await expect(client.exec(['some', 'command'])).rejects.toThrow('Unexpected empty response');
   });
 
   it('appends --format json when not present', async () => {

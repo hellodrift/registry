@@ -80,9 +80,11 @@ export class GwsClient {
         timeout: this.timeout,
         maxBuffer: 10 * 1024 * 1024,
       });
-      // gws prints "Using keyring backend: keyring" to stdout before JSON
+      // gws may print "Using keyring backend: keyring" to stdout before JSON (observed in gws 0.16.0)
       const trimmed = stdout.replace(/^Using keyring backend:.*\n?/m, '').trim();
-      if (!trimmed) return {} as T;
+      if (!trimmed) {
+        throw new GwsError('Unexpected empty response from gws CLI', GwsExitCode.INTERNAL_ERROR, '');
+      }
       return JSON.parse(trimmed) as T;
     } catch (err: any) {
       const exitCode = err.code ?? err.status ?? GwsExitCode.INTERNAL_ERROR;
