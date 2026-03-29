@@ -22,8 +22,7 @@ import { usePluginQuery, usePluginMutation } from '@tryvienna/sdk/react';
 import type { EntityDrawerProps } from '@tryvienna/sdk';
 import { REDDIT_POST_URI_PATH } from '../entities/uri';
 import {
-  GET_REDDIT_POST,
-  GET_REDDIT_COMMENTS,
+  GET_REDDIT_POST_WITH_COMMENTS,
   POST_REDDIT_COMMENT,
   DRAFT_REDDIT_REPLY,
 } from '../client/operations';
@@ -74,22 +73,17 @@ export function RedditPostEntityDrawer({ uri, DrawerContainer }: EntityDrawerPro
   const subreddit = parsed?.id?.['subreddit'] ?? '';
   const postId = parsed?.id?.['postId'] ?? '';
 
-  // ── Queries ────────────────────────────────────────────────────────────
-  const { data: postData, loading: postLoading, error: postError } = usePluginQuery<{
-    redditPost: PostData;
-  }>(GET_REDDIT_POST, {
-    variables: { subreddit, postId },
+  // ── Query (single API call for post + comments) ─────────────────────────
+  const { data: resultData, loading: dataLoading, error: postError } = usePluginQuery<{
+    redditPostWithComments: { post: PostData; comments: CommentData[] };
+  }>(GET_REDDIT_POST_WITH_COMMENTS, {
+    variables: { subreddit, postId, commentSort: 'best', commentLimit: 30 },
     skip: !subreddit || !postId,
     fetchPolicy: 'cache-and-network',
   });
 
-  const { data: commentsData, loading: commentsLoading } = usePluginQuery<{
-    redditComments: CommentData[];
-  }>(GET_REDDIT_COMMENTS, {
-    variables: { subreddit, postId, sort: 'best', limit: 30 },
-    skip: !subreddit || !postId,
-    fetchPolicy: 'cache-and-network',
-  });
+  const postLoading = dataLoading;
+  const commentsLoading = dataLoading;
 
   // ── Mutations ──────────────────────────────────────────────────────────
   const [postComment, { loading: commentSending }] = usePluginMutation(POST_REDDIT_COMMENT);
@@ -104,8 +98,8 @@ export function RedditPostEntityDrawer({ uri, DrawerContainer }: EntityDrawerPro
   // ── Draft state ────────────────────────────────────────────────────────
   const [showDraft, setShowDraft] = useState(false);
 
-  const post = postData?.redditPost;
-  const comments = commentsData?.redditComments ?? [];
+  const post = resultData?.redditPostWithComments?.post;
+  const comments = resultData?.redditPostWithComments?.comments ?? [];
 
   // ── Handlers ───────────────────────────────────────────────────────────
 

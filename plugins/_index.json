@@ -49,7 +49,7 @@
     "description": "Monitor subreddits for engagement opportunities and draft AI-assisted replies",
     "version": "0.0.1",
     "source": "inline",
-    "icon": "🤖",
+    "icon": "👽",
     "category": "Community",
     "tags": ["reddit", "community", "engagement", "integration"],
     "author": { "name": "Drift Team" }

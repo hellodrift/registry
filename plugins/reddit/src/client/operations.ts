@@ -30,43 +30,40 @@ export const GET_REDDIT_FEED = gql`
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Entity Drawer Queries
+// Entity Drawer Query — single API call for post + comments
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const GET_REDDIT_POST = gql`
-  query GetRedditPost($subreddit: String!, $postId: String!) {
-    redditPost(subreddit: $subreddit, postId: $postId) {
-      id
-      title
-      author
-      subreddit
-      score
-      numComments
-      selftext
-      url
-      permalink
-      createdUtc
-      flair
-      isSelf
-      thumbnail
-      domain
-      upvoteRatio
-      fullname
-    }
-  }
-`;
-
-export const GET_REDDIT_COMMENTS = gql`
-  query GetRedditComments($subreddit: String!, $postId: String!, $sort: String, $limit: Int) {
-    redditComments(subreddit: $subreddit, postId: $postId, sort: $sort, limit: $limit) {
-      id
-      author
-      body
-      score
-      createdUtc
-      depth
-      parentId
-      fullname
+export const GET_REDDIT_POST_WITH_COMMENTS = gql`
+  query GetRedditPostWithComments($subreddit: String!, $postId: String!, $commentSort: String, $commentLimit: Int) {
+    redditPostWithComments(subreddit: $subreddit, postId: $postId, commentSort: $commentSort, commentLimit: $commentLimit) {
+      post {
+        id
+        title
+        author
+        subreddit
+        score
+        numComments
+        selftext
+        url
+        permalink
+        createdUtc
+        flair
+        isSelf
+        thumbnail
+        domain
+        upvoteRatio
+        fullname
+      }
+      comments {
+        id
+        author
+        body
+        score
+        createdUtc
+        depth
+        parentId
+        fullname
+      }
     }
   }
 `;

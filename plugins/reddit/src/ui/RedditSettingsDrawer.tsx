@@ -25,7 +25,7 @@ import {
 } from '@tryvienna/ui';
 import type { PluginHostApi, CanvasLogger } from '@tryvienna/sdk';
 import { KeyRound, Check, Trash2, Eye, EyeOff, X, Plus, RotateCcw } from 'lucide-react';
-import { useRedditSettings } from './useRedditSettings';
+import { useRedditSettings, type RedditSettings } from './useRedditSettings';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Credential helpers

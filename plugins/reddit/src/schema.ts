@@ -33,6 +33,11 @@ interface RedditCommentResultShape {
   commentId: string | null;
 }
 
+interface RedditPostWithCommentsShape {
+  post: RedditPostShape;
+  comments: RedditCommentShape[];
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Schema registration
 // ─────────────────────────────────────────────────────────────────────────────
@@ -113,6 +118,18 @@ export function registerRedditSchema(rawBuilder: unknown): void {
     }),
   });
 
+  // ── Composite type for post + comments (single API call) ────────────────
+
+  // @ts-expect-error — builder type args not available across .d.ts boundary
+  const RedditPostWithCommentsRef = builder.objectRef<RedditPostWithCommentsShape>('RedditPostWithComments');
+  builder.objectType(RedditPostWithCommentsRef, {
+    description: 'A Reddit post with its comments, fetched in a single API call',
+    fields: (t) => ({
+      post: t.field({ type: RedditPostRef, resolve: (r) => r.post }),
+      comments: t.field({ type: [RedditCommentRef], resolve: (r) => r.comments }),
+    }),
+  });
+
   // ── Queries ───────────────────────────────────────────────────────────────
 
   builder.queryFields((t) => ({
@@ -158,43 +175,24 @@ export function registerRedditSchema(rawBuilder: unknown): void {
       },
     }),
 
-    redditPost: t.field({
-      type: RedditPostRef,
+    redditPostWithComments: t.field({
+      type: RedditPostWithCommentsRef,
       nullable: true,
-      description: 'Fetch a single Reddit post by subreddit and post ID.',
+      description: 'Fetch a Reddit post and its comments in a single API call.',
       args: {
         subreddit: t.arg.string({ required: true }),
         postId: t.arg.string({ required: true }),
+        commentSort: t.arg.string({ required: false }),
+        commentLimit: t.arg.int({ required: false }),
       },
       resolve: async (_root, args, ctx) => {
         const client = await getRedditClient(ctx);
-        const { post } = await api.fetchPostWithComments(client, {
+        return api.fetchPostWithComments(client, {
           subreddit: args.subreddit as string,
           postId: args.postId as string,
-          limit: 1, // Only need the post, not comments
+          sort: (args.commentSort as string | null) ?? 'best',
+          limit: (args.commentLimit as number | null) ?? 50,
         });
-        return post;
-      },
-    }),
-
-    redditComments: t.field({
-      type: [RedditCommentRef],
-      description: 'Fetch comments for a Reddit post.',
-      args: {
-        subreddit: t.arg.string({ required: true }),
-        postId: t.arg.string({ required: true }),
-        sort: t.arg.string({ required: false }),
-        limit: t.arg.int({ required: false }),
-      },
-      resolve: async (_root, args, ctx) => {
-        const client = await getRedditClient(ctx);
-        const { comments } = await api.fetchPostWithComments(client, {
-          subreddit: args.subreddit as string,
-          postId: args.postId as string,
-          sort: (args.sort as string | null) ?? 'best',
-          limit: (args.limit as number | null) ?? 50,
-        });
-        return comments;
       },
     }),
   }));
@@ -302,14 +300,28 @@ export function registerRedditSchema(rawBuilder: unknown): void {
     search: async (query, ctx) => {
       const client = ctx.integrations.reddit.client as RedditClient;
       if (!client) return [];
-      // Search requires at least a subreddit context — for generic search,
-      // search across a broad set. This is limited by design.
       const searchQuery = query.query ?? '';
       if (!searchQuery) return [];
+
+      // If query contains "r/subreddit keyword" or "subreddit/keyword", scope to that sub.
+      // Otherwise search broadly. Prefer scoped search over r/all for relevance.
+      let subreddits: string[];
+      let keywords: string[];
+      const subMatch = searchQuery.match(/^r\/(\w+)\s+(.+)$/i) ?? searchQuery.match(/^(\w+)\/(.+)$/);
+      if (subMatch) {
+        subreddits = [subMatch[1]];
+        keywords = [subMatch[2]];
+      } else {
+        // Use filters.subreddits if provided by the caller, otherwise search broadly
+        const filterSubs = (query.filters as any)?.subreddits as string[] | undefined;
+        subreddits = filterSubs?.length ? filterSubs : ['all'];
+        keywords = [searchQuery];
+      }
+
       try {
         const posts = await api.searchSubredditPosts(client, {
-          subreddits: ['all'],
-          keywords: [searchQuery],
+          subreddits,
+          keywords,
           sort: 'relevance',
           limit: query.limit ?? 20,
         });
