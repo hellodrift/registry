@@ -49,18 +49,20 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
   const FeedbackItemRef = builder.objectRef<FeedbackItemShape>('FeedbackItem');
   builder.objectType(FeedbackItemRef, {
     description: 'A user feedback submission',
-    fields: (t) => ({
-      id: t.id({ resolve: (item) => item.id }),
+    fields: (t: any) => ({
+      id: t.id({ resolve: (item: any) => item.id }),
       message: t.exposeString('message'),
       name: t.exposeString('name', { nullable: true }),
       email: t.exposeString('email', { nullable: true }),
       userId: t.exposeString('userId', { nullable: true }),
       source: t.exposeString('source'),
       status: t.exposeString('status'),
+      // TODO: Use a JSON scalar type when available in the plugin Pothos context
+      // instead of round-tripping through JSON.stringify/parse.
       metadata: t.field({
         type: 'String',
         nullable: true,
-        resolve: (item) => JSON.stringify(item.metadata),
+        resolve: (item: any) => JSON.stringify(item.metadata),
       }),
       createdAt: t.exposeString('createdAt'),
     }),
@@ -74,7 +76,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
   }>('FeedbackLinearResult');
   builder.objectType(FeedbackLinearResultRef, {
     description: 'Result of creating a Linear issue from feedback',
-    fields: (t) => ({
+    fields: (t: any) => ({
       success: t.exposeBoolean('success'),
       message: t.exposeString('message'),
       linearIssueId: t.exposeString('linearIssueId', { nullable: true }),
@@ -83,7 +85,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
 
   // ── Queries ───────────────────────────────────────────────────────────────
 
-  builder.queryFields((t) => ({
+  builder.queryFields((t: any) => ({
     feedbackItems: t.field({
       type: [FeedbackItemRef],
       description: 'List user feedback submissions',
@@ -93,7 +95,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
         offset: t.arg.int({ defaultValue: 0 }),
         search: t.arg.string(),
       },
-      resolve: async (_root, args, ctx) => {
+      resolve: async (_root: any, args: any, ctx: any) => {
         const client = await getFeedbackClientOrNull(ctx);
         if (!client) return [];
         try {
@@ -117,7 +119,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
       args: {
         id: t.arg.id({ required: true }),
       },
-      resolve: async (_root, args, ctx) => {
+      resolve: async (_root: any, args: any, ctx: any) => {
         const client = await getFeedbackClient(ctx);
         return api.getFeedback(client, { id: String(args.id) });
       },
@@ -126,7 +128,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
 
   // ── Mutations ─────────────────────────────────────────────────────────────
 
-  builder.mutationFields((t) => ({
+  builder.mutationFields((t: any) => ({
     updateFeedbackStatus: t.field({
       type: FeedbackItemRef,
       description: 'Update the status of a feedback item',
@@ -134,7 +136,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
         id: t.arg.id({ required: true }),
         status: t.arg.string({ required: true }),
       },
-      resolve: async (_root, args, ctx) => {
+      resolve: async (_root: any, args: any, ctx: any) => {
         const client = await getFeedbackClient(ctx);
         return api.updateFeedbackStatus(client, {
           id: String(args.id),
@@ -152,7 +154,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
         title: t.arg.string(),
         priority: t.arg.int(),
       },
-      resolve: async (_root, args, ctx) => {
+      resolve: async (_root: any, args: any, ctx: any) => {
         // 1. Get feedback item
         const feedbackClient = await getFeedbackClient(ctx);
         const feedback = await api.getFeedback(feedbackClient, { id: String(args.feedbackId) });
@@ -213,7 +215,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
 
   builder.registerEntityHandlers(feedbackItemEntity, {
     integrations: { feedback: feedbackIntegration },
-    resolve: async (id, ctx) => {
+    resolve: async (id: any, ctx: any) => {
       const client = ctx.integrations.feedback.client as FeedbackApiClient;
       if (!client) return null;
       try {
@@ -231,7 +233,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
         return null;
       }
     },
-    search: async (query, ctx) => {
+    search: async (query: any, ctx: any) => {
       const client = ctx.integrations.feedback.client as FeedbackApiClient;
       if (!client) return [];
       try {
@@ -251,7 +253,7 @@ export function registerFeedbackSchema(rawBuilder: unknown): void {
         return [];
       }
     },
-    resolveContext: async (entity) => {
+    resolveContext: async (entity: any) => {
       return `### Feedback: ${entity.title}\n- **URI:** ${entity.uri}\n- ${entity.description}`;
     },
   });

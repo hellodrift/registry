@@ -16,7 +16,7 @@ import {
 import type { NavSidebarCanvasProps } from '@tryvienna/sdk';
 import { Settings } from 'lucide-react';
 import { useFeedbackSettings } from './useFeedbackSettings';
-import { STATUS_COLORS, STATUS_LABELS } from '../helpers';
+import { STATUS_COLORS, STATUS_LABELS, formatRelative } from '../helpers';
 import { GET_FEEDBACK_ITEMS } from '../client/operations';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -31,20 +31,6 @@ interface FeedbackNav {
   source: string;
   status: string;
   createdAt: string;
-}
-
-function formatRelative(dateStr: string): string {
-  const date = new Date(dateStr);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffMins = Math.floor(diffMs / 60_000);
-  if (diffMins < 1) return 'just now';
-  if (diffMins < 60) return `${diffMins}m ago`;
-  const diffHours = Math.floor(diffMins / 60);
-  if (diffHours < 24) return `${diffHours}h ago`;
-  const diffDays = Math.floor(diffHours / 24);
-  if (diffDays < 30) return `${diffDays}d ago`;
-  return date.toLocaleDateString();
 }
 
 function truncate(str: string, max: number): string {
@@ -131,8 +117,8 @@ export function FeedbackNavSection({
     };
     check();
     const handler = () => { check(); };
-    window.addEventListener('vienna-plugin:feedback:settings-changed', handler);
-    return () => { cancelled = true; window.removeEventListener('vienna-plugin:feedback:settings-changed', handler); };
+    window.addEventListener('vienna-plugin:feedback:credentials-changed', handler);
+    return () => { cancelled = true; window.removeEventListener('vienna-plugin:feedback:credentials-changed', handler); };
   }, [hostApi]);
 
   const { data, loading, error } = usePluginQuery<{ feedbackItems: FeedbackNav[] }>(GET_FEEDBACK_ITEMS, {

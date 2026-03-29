@@ -7,10 +7,8 @@
 
 import { defineIntegration } from '@tryvienna/sdk';
 import type { IntegrationDefinition } from '@tryvienna/sdk';
-import type { FeedbackApiClient } from './helpers';
+import { FEEDBACK_SVG, type FeedbackApiClient } from './helpers';
 import { registerFeedbackSchema } from './schema';
-
-const FEEDBACK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>';
 
 export const feedbackIntegration: IntegrationDefinition<FeedbackApiClient> = defineIntegration<FeedbackApiClient>({
   id: 'feedback',

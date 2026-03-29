@@ -198,7 +198,7 @@ export function FeedbackSettingsDrawer({
     try {
       const keys = await hostApi.getCredentialStatus('feedback');
       setCredentials(keys);
-      window.dispatchEvent(new CustomEvent('vienna-plugin:feedback:settings-changed'));
+      window.dispatchEvent(new CustomEvent('vienna-plugin:feedback:credentials-changed'));
     } catch (err) {
       logger.warn('Failed to fetch credential status', { error: String(err) });
     } finally {

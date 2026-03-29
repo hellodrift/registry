@@ -22,7 +22,7 @@ import { ExternalLink } from 'lucide-react';
 import { parseEntityURI } from '@tryvienna/sdk';
 import { usePluginQuery, usePluginMutation } from '@tryvienna/sdk/react';
 import type { EntityDrawerProps } from '@tryvienna/sdk';
-import { FEEDBACK_STATUSES, STATUS_LABELS, STATUS_COLORS } from '../helpers';
+import { FEEDBACK_STATUSES, STATUS_LABELS, STATUS_COLORS, formatRelative } from '../helpers';
 import { FEEDBACK_URI_PATH } from '../entities/uri';
 import {
   GET_FEEDBACK_ITEM,
@@ -77,20 +77,6 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-function formatRelative(dateStr: string): string {
-  const date = new Date(dateStr);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffMins = Math.floor(diffMs / 60_000);
-  if (diffMins < 1) return 'just now';
-  if (diffMins < 60) return `${diffMins}m ago`;
-  const diffHours = Math.floor(diffMins / 60);
-  if (diffHours < 24) return `${diffHours}h ago`;
-  const diffDays = Math.floor(diffHours / 24);
-  if (diffDays < 30) return `${diffDays}d ago`;
-  return date.toLocaleDateString();
-}
-
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleString();
 }
@@ -128,10 +114,17 @@ export function FeedbackEntityDrawer({ uri, headerActions, DrawerContainer }: En
   const [linearTeamId, setLinearTeamId] = useState('');
   const [linearTitle, setLinearTitle] = useState('');
   const [linearResult, setLinearResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [statusError, setStatusError] = useState<string | null>(null);
 
   // ── Handlers ───────────────────────────────────────────────────────────
   const handleStatusChange = useCallback(async (status: string) => {
-    await updateStatus({ variables: { id: feedbackId, status } });
+    setStatusError(null);
+    try {
+      await updateStatus({ variables: { id: feedbackId, status } });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Failed to update status';
+      setStatusError(msg);
+    }
   }, [updateStatus, feedbackId]);
 
   const handleCreateLinearIssue = useCallback(async () => {
@@ -213,6 +206,12 @@ export function FeedbackEntityDrawer({ uri, headerActions, DrawerContainer }: En
         <div data-slot="feedback-entity-drawer" className="space-y-4">
           <SavingBar visible={isSaving} />
 
+          {statusError && (
+            <div className="rounded border border-destructive/30 bg-destructive/10 px-3 py-1.5 text-xs text-destructive">
+              {statusError}
+            </div>
+          )}
+
           {/* Header: status + source + time */}
           <div className="flex items-center gap-2 flex-wrap">
             <StatusBadge status={item.status} />
@@ -267,7 +266,7 @@ export function FeedbackEntityDrawer({ uri, headerActions, DrawerContainer }: En
               <Separator />
               <div>
                 <span className="text-xs font-medium text-muted-foreground mb-2 block">
-                  Device Info
+                  Metadata
                 </span>
                 <div className="space-y-1">
                   {Object.entries(metadata).map(([key, value]) => (
